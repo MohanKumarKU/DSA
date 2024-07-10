@@ -1,0 +1,56 @@
+class Solution {
+
+// Find all prime numbers up to 'right' using the Sieve of Eratosthenes
+
+    public int[] closestPrimes(int left, int right) {
+        
+        boolean arr[] = new boolean[right+1];
+        Arrays.fill(arr, true);
+
+        for(int i=2; i*i<=right; i++)
+        {
+            if(arr[i])
+            {
+                for(int k = i*i; k<=right; k+=i)
+                    arr[k] = false;
+            }
+        }
+
+
+// List to store primes in the given range
+        List<Integer> primeList = new ArrayList<>();
+        for(int i=Math.max(2, left); i<arr.length; i++)
+        {
+            if(arr[i])
+                primeList.add(i);
+        }
+
+        if(primeList.size() <=1)
+        {
+            return new int[]{-1,-1};
+        }
+            int num1 = primeList.get(0);
+            int num2 = primeList.get(1);
+            int min = num2 - num1;
+            int x = 2;
+
+
+// Find the pair of primes with the minimum difference
+
+            while(x<primeList.size())
+            {
+                if(primeList.get(x) - primeList.get(x-1) < min)
+                {
+                    min = primeList.get(x) - primeList.get(x-1);
+                    num1 = primeList.get(x-1);
+                    num2 = primeList.get(x);
+                }
+                x++;
+            }
+
+            return new int[]{num1, num2};
+        
+
+    }
+    
+}
