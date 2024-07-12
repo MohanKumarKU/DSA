@@ -17,7 +17,7 @@ private static double getMedian(int[] arrX, int[] arrY) {
 	
 	if(arrX.length > arrY.length)
 	{
-		getMedian(arrY, arrX);
+		return getMedian(arrY, arrX);
 	}
 	
 	while(l<=h)
